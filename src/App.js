@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import DTube from '../abis/DTube.json'
-import Navbar from './Navbar'
-import Main from './Main'
-import Footer from './Footer'
+import DTube from './abis/DTube.json';
+import Navbar from './components/Navbar';
+import Main from './components/Main';
+import Footer from './components/Footer';
 import Web3 from 'web3';
 import './App.css';
 
