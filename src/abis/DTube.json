@@ -131,7 +131,7 @@
   "sourceMap": "34:903:0:-;;;78:1;53:26;;83:28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;342:25;8:9:-1;5:2;;;30:1;27;20:12;5:2;342:25:0;34:903;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
   "deployedSourceMap": "34:903:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;34:903:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;83:28;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;83:28:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;371:564;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;371:564:0;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;371:564:0;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;371:564:0;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;371:564:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;371:564:0;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;371:564:0;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;371:564:0;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;371:564:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;371:564:0;;;;;;;;;;;;;;;:::i;:::-;;53:26;;;:::i;:::-;;;;;;;;;;;;;;;;;;;115:36;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;115:36:0;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;115:36:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;115:36:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;83:28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;371:564::-;527:1;506:10;500:24;:28;492:37;;;;;;602:1;585:6;579:20;:24;571:33;;;;;;679:1;659:22;;:10;:22;;;;651:31;;;;;;715:10;;:13;;;;;;;;;;;;;789:49;;;;;;;;795:10;;789:49;;;;807:10;789:49;;;;819:6;789:49;;;;827:10;789:49;;;;;768:6;:18;775:10;;768:18;;;;;;;;;;;:70;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;873:57;887:10;;899;911:6;919:10;873:57;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;873:57:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;873:57:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;371:564;;:::o;53:26::-;;;;:::o;115:36::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;34:903::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity >=0.4.22 <0.9.0;\n\ncontract DTube {\n  uint public videoCount = 0;\n  string public name = \"DTube\";\n  mapping(uint => Video) public videos;\n\n  struct Video {\n    uint id;\n    string hash;\n    string title;\n    address author;\n  }\n\n  event VideoUploaded(\n    uint id,\n    string hash,\n    string title,\n    address author\n  );\n\n  constructor() public{\n  }\n\n  function uploadVideo(string memory _videoHash, string memory _title) public {\n    // Make sure the video hash exists\n    require(bytes(_videoHash).length > 0);\n    // Make sure video title exists\n    require(bytes(_title).length > 0);\n    // Make sure uploader address exists\n    require(msg.sender!=address(0));\n\n    // Increment video id\n    videoCount ++;\n\n    // Add video to the contract\n    videos[videoCount] = Video(videoCount, _videoHash, _title, msg.sender);\n    // Trigger an event\n    emit VideoUploaded(videoCount, _videoHash, _title, msg.sender);\n  }\n}\n",
-  "sourcePath": "/Users/noobtoninja/Job/Programe/dapp-cowcert/src/contracts/DTube.sol",
+  "sourcePath": "/Users/noobtoninja/Job/Programe/TestDay1/src/contracts/DTube.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/DTube.sol",
     "exportedSymbols": {
@@ -700,10 +700,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        111,
-                        112
+                        240,
+                        241
                       ],
-                      "referencedDeclaration": 111,
+                      "referencedDeclaration": 240,
                       "src": "492:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -848,10 +848,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        111,
-                        112
+                        240,
+                        241
                       ],
-                      "referencedDeclaration": 111,
+                      "referencedDeclaration": 240,
                       "src": "571:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -899,7 +899,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 108,
+                            "referencedDeclaration": 237,
                             "src": "659:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -996,10 +996,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        111,
-                        112
+                        240,
+                        241
                       ],
-                      "referencedDeclaration": 111,
+                      "referencedDeclaration": 240,
                       "src": "651:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1158,7 +1158,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 108,
+                            "referencedDeclaration": 237,
                             "src": "827:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1285,7 +1285,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 108,
+                          "referencedDeclaration": 237,
                           "src": "919:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2031,10 +2031,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                111,
-                                112
+                                240,
+                                241
                               ],
-                              "referencedDeclaration": 111,
+                              "referencedDeclaration": 240,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2185,10 +2185,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                111,
-                                112
+                                240,
+                                241
                               ],
-                              "referencedDeclaration": 111,
+                              "referencedDeclaration": 240,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2339,10 +2339,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                111,
-                                112
+                                240,
+                                241
                               ],
-                              "referencedDeclaration": 111,
+                              "referencedDeclaration": 240,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2383,7 +2383,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 108,
+                                      "referencedDeclaration": 237,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -2667,7 +2667,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 108,
+                                      "referencedDeclaration": 237,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -2803,7 +2803,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 108,
+                                  "referencedDeclaration": 237,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -2854,12 +2854,12 @@
     "97": {
       "events": {},
       "links": {},
-      "address": "0xcd39DEc883e4310170532279eFC9f0F339CF0acD",
-      "transactionHash": "0x75e0401c714a18b912b6883c2c47d20c15560e0d85ffc0e8c70df614de16e7ba"
+      "address": "0x32378538b3Db126CbEb2B3Bba2640bd30323ba81",
+      "transactionHash": "0x8b92827d61418bd64473885a12a8c19677a340ab8535c281ef9ac7e73a617a11"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-05T05:33:33.810Z",
+  "updatedAt": "2021-10-09T07:07:32.927Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
