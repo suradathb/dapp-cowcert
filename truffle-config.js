@@ -3,7 +3,7 @@ require('babel-polyfill');
 require('dotenv').config();
 const HDWalletProvider = require("@truffle/hdwallet-provider")
 const providerTestnet = new HDWalletProvider({
-  privateKeys: ['b8a56e6041d2d97564fdbe342e32e8518ec1e41230d11ef3333f0bebd152a16a'],
+  privateKeys: ['19bf01eefd397770e927a2e9249768c8865151de3c23b53d57060511fc25c0f5'],
   providerOrUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
 });
 module.exports = {
