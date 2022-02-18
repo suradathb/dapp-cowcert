@@ -1,11 +1,11 @@
-# การใช้งานทดสอบ DTube blocchain สำหรับวีดีโอ
+# การใช้งานทดสอบ Kmutnb Tube blocchain สำหรับวีดีโอ
 
 ## CMD : `git clone https://github.com/suradathb/dapp-cowcert.git newProjectName`
 
 ## install npm : `npm install`
 ## Start Project : `npm start`
 
-## เตรียมก่อนใช้งาน blockchain DTube
+## เตรียมก่อนใช้งาน blockchain Kmutnb Tube
 ## รับ Account : [VANITY-ETH](https://vanity-eth.tk/)
 ## ขอเงิน BNB : [Binance Smart Chain Faucet](https://testnet.binance.org/faucet-smart) 
 - copy Account to input
