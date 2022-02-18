@@ -21,7 +21,7 @@ class Main extends Component {
             <h3 className="mt-3"><b><i className="video-title">{this.props.currentTitle}</i></b></h3>
           </div>
           <div className="vide-feed col-md-2 border border-secondary overflow-auto text-center" style={{ maxHeight: '4000px', minWidth: '175px' }}>
-            <h5 className="feed-title"><b>Video Feed 📺</b></h5>
+            <h5 className="feed-title"><b>Video Kmutnb</b></h5>
             <form onSubmit={(event) => {
               event.preventDefault()
               const title = this.videoTitle.value

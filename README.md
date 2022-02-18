@@ -50,3 +50,4 @@ Note : ดูข้อมูลเพิ่มเติมได้ที่  [B
 - [วิธีใช้งาน Git และอัพไฟล์ขึ้น github ฉบับรวบรัด By : Teekha Marketing](https://teekhawat.com/%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99-git-%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%AD%E0%B8%B1%E0%B8%9E%E0%B9%84%E0%B8%9F%E0%B8%A5%E0%B9%8C%E0%B8%82/)
 - [ต้นฉบับ Code By AkhilesThite](https://github.com/AkhileshThite/DTube)
 - [การเชื่อมต่อ MetaMask กับ Binance Smart Chain By Blog BINANCE](https://academy.binance.com/th/articles/connecting-metamask-to-binance-smart-chain)
+
