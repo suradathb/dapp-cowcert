@@ -2,7 +2,7 @@ pragma solidity >=0.4.22 <0.9.0;
 
 contract DTube {
   uint public videoCount = 0;
-  string public name = "DTube";
+  string public name = "Kmutnb Tube";
   mapping(uint => Video) public videos;
 
   struct Video {
